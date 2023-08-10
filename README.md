@@ -4,11 +4,14 @@
 
 ## Overview
 
-This repository contains two major Python scripts related to serial communication and control of a vehicle. These scripts are designed to be used with the Robot Operating System (ROS), and they utilize custom messages from the `steadylab` package.
+This repository contains Python scripts related to serial communication and control of a vehicle. These scripts are designed to be used with the Robot Operating System (ROS2), and they utilize custom messages from the `steadylab` package.
 
 ### 1. Serial Node
 
 The `SerialNode` class is responsible for managing serial communication with the connected hardware. It reads and writes data to the specified serial port, translating messages between the system and the device.
+```
+sudo apt-get install python3-serial
+```
 
 ### 2. Serial Control
 
@@ -39,4 +42,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Contact
 
-For any inquiries, please contact [your-email@example.com].
+For any inquiries, please contact [okharry1@dgu.ac.kr].
