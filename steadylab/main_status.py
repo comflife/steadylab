@@ -24,7 +24,7 @@ from steadylab.msg import WriteCar
 
 class Serial(Node):  # Node 클래스를 상속받습니다.
     def __init__(self):
-        super().__init__('serial')  # Node의 __init__ 메서드를 호출하여 노드 이름을 설정합니다.
+        super().__init__('main_status')  # Node의 __init__ 메서드를 호출하여 노드 이름을 설정합니다.
         
         qos = QoSProfile(depth=1)
         self.speed = 0

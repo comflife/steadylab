@@ -24,13 +24,13 @@ from steadylab.msg import WriteCar
 
 class Serial(Node):  # Node 클래스를 상속받습니다.
     def __init__(self):
-        super().__init__('serial')  # Node의 __init__ 메서드를 호출하여 노드 이름을 설정합니다.
+        super().__init__('keyboard')  # Node의 __init__ 메서드를 호출하여 노드 이름을 설정합니다.
         
         qos = QoSProfile(depth=1)
         self.speed = 0
         self.steer = 0
 
-        self.sub_speed_steer = self.create_subscription(WriteCar, 'serial', self.callback, qos)
+        self.sub_speed_steer = self.create_subscription(WriteCar, 'comm', self.callback, qos)
         self.erp_sub = self.create_subscription(ReadCar, 'read_car', self.callback, qos)
 
         self.erp_pub = self.create_publisher(WriteCar, 'write_car', qos)

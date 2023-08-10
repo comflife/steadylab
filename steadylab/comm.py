@@ -31,7 +31,7 @@ PI = np.pi
 
 class SerialNode(Node):
     def __init__(self):
-        super().__init__('serial_node')
+        super().__init__('comm')
         
         # Variables
         self.steer1 = 0
