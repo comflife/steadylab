@@ -23,7 +23,7 @@ The `Serial` class provides a user interface to control speed and steering of th
 - Python 3
 - Numpy
 - PySerial
-- Custom messages (`ErpRead`, `ErpWrite`) from the `steadylab` package
+- Custom messages (`ReadCar`, `WriteCar`) from the `steadylab` package
 
 ## Installation
 

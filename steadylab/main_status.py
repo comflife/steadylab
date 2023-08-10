@@ -30,9 +30,7 @@ class Serial(Node):  # Node 클래스를 상속받습니다.
         self.speed = 0
         self.steer = 0
 
-        self.sub_speed_steer = self.create_subscription(WriteCar, 'serial', self.callback, qos)
-        self.erp_sub = self.create_subscription(ReadCar, 'read_car', self.callback, qos)
-
+        self.erp_sub = self.create_subscription(WriteCar, 'from_bev', self.callback, qos)
         self.erp_pub = self.create_publisher(WriteCar, 'write_car', qos)
         self.erp = WriteCar()
 
@@ -40,33 +38,8 @@ class Serial(Node):  # Node 클래스를 상속받습니다.
         self.speed = data.read_speed
         self.steer = data.read_steer
 
-    def serial(self, key):
-        try:
-            key = int(key)
-        except ValueError:
-            return self.speed, self.steer
-        
-        if(key == 8):
-            self.speed += 30
-        elif(key == 2):
-            self.speed -= 10
-        elif(key == 4):
-            self.steer += 10
-        elif(key == 6):
-            self.steer -= 10
-        elif(key == 0):
-            self.steer = 0
-
-        if self.speed > 200:
-            self.speed = 200
-        elif self.speed < 0:
-            self.speed = 0
-        if self.steer > 2000:
-            self.steer = 2000
-        elif self.steer < -2000:
-            self.steer = -2000
-        
         return self.speed, self.steer
+
     
     def pub_serial(self, speed, steer):
         self.erp.write_speed = speed
@@ -81,11 +54,9 @@ def main(args=None):
 
     rate = s.create_rate(10)  # Rate를 생성합니다.
 
-    while rclpy.ok():  # rclpy.is_shutdown() 대신 rclpy.ok()를 사용합니다.
-        print("speed : 8 + 2 -, steer : 4 - 6+ ,stop : 0")
-        key = input("key : ")
+    while rclpy.ok():  # rclpy.is_shutdown() 대신 rclpy.ok()를 사용
 
-        speed, steer = s.serial(key)
+        speed, steer = s.callback()
         print("speed", speed)
         print("steer", steer)
         s.pub_serial(speed, steer)
